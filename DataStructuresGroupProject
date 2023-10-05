@@ -126,7 +126,7 @@ class ParsePost
                 
             else {
 
-                num = ch;
+                num = Character.getNumericValue(ch);
                 theStack.push(num);
             }
            
