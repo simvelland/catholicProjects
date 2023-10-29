@@ -91,17 +91,15 @@ public class ParsePost {
                                 oStack.pop();
                                 break;
                         case '*':
-                                while (oStack.peek() == 47 || oStack.peek() == 42) {
-
-                                    postfix += oStack.pop();
-                                }
-                                oStack.push(current);
-                                break;
                         case '/':
-                                while (oStack.peek() == 47 || oStack.peek() == 42) {
+                                do {
+
+                                    if (oStack.peek() == 47 || oStack.peek() == 42) {
 
                                     postfix += oStack.pop();
+                                    }
                                 }
+                                while (oStack.size() > 0);
                                 oStack.push(current);
                                 break;
                         default:
@@ -156,11 +154,7 @@ public class ParsePost {
             ch = postfix.charAt(j); // read from input
             calcStack.displayStack(""+ch+" "); // *diagnostic*
             
-
-            // if itâ€™s an operator...
-                // pop operands,
-                // do arithmetic,                
-                // push result
+            
             if (Character.isDigit(ch)) {
                 
                 int s = Character.getNumericValue(ch);
