@@ -65,7 +65,7 @@ public class ParsePost {
                                     postfix += oStack.pop();
                                     }
                                 }
-                                while (oStack.size() > 0);
+                                while (oStack.size() > 0 && (oStack.peek() != 40));
                                 oStack.push(current);
                                 break;
                         default:
