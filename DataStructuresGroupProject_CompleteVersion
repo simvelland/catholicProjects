@@ -137,7 +137,7 @@ public class Sandbox {
 
                     if (oStack.isEmpty()) {
 
-                        if (postfix.isEmpty()) {
+                        if (postfix.isEmpty() && holder == "") {
 
                             oStack.push(a);
                         }
@@ -164,6 +164,7 @@ public class Sandbox {
                             case '(':
                                 oStack.push(a);
                                 break;
+
                             case ')':
                                 do {
                                     if (oStack.peek() != 40) {
@@ -174,19 +175,41 @@ public class Sandbox {
 
                                 oStack.pop();
                                 break;
+
+                            case '^':
+                                do {
+                                    if (oStack.peek() == 94) {
+
+                                        postfix.insert(String.valueOf(oStack.pop()));
+                                    }
+                                    else {
+                                        oStack.push(a);
+                                        break;
+                                    }
+                                } while (oStack.peek() != 40 && oStack.size() > 0);
+                                break;
+
                             case '*':
                             case '/':
                             case '%':
                                 do {
 
-                                    if (oStack.peek() == 47 || oStack.peek() == 42) {
+                                    if (oStack.peek() == 47 || oStack.peek() == 42 || oStack.peek() == 37 || oStack.peek() == 94) {
 
                                         postfix.insert(String.valueOf(oStack.pop()));
                                     }
+                                    else {
+                                        oStack.push(a);
+                                        break;
+                                    }
                                 }
                                 while (oStack.size() > 0 && (oStack.peek() != 40));
-                                oStack.push(a);
+                                if (oStack.size() == 0 || oStack.peek() == 40) {
+
+                                    oStack.push(a);
+                                }
                                 break;
+
                             default:
                                 do {
                                     if (oStack.peek() != 40) {
