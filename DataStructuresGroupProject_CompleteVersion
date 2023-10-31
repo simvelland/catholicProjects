@@ -40,7 +40,7 @@ public class CharStack {
     private char[] cStack;
     private int top;
 
-    public CharStack(int size) //constructor for char stack
+    public CharStack(int size)
     {
         maxSize = size;
         cStack = new char[maxSize];
@@ -52,35 +52,35 @@ public class CharStack {
         cStack[top++] = c; 
     }
     //--------------------------------------------------------------
-    public char pop() // take item from top of stack
+    public char pop()
     { 
         return cStack[--top]; 
     
     }
     //--------------------------------------------------------------
-    public char peek() // peek at top of stack
+    public char peek()
     { 
         return cStack[top - 1]; 
     }
     //--------------------------------------------------------------
-    public boolean isEmpty() // true if stack is empty
+    public boolean isEmpty()
     { 
         return (top == 0); 
     }
     //--------------------------------------------------------------
-    public boolean isFull() // true if stack is full
+    public boolean isFull()
     {
         
         return (top - 1 == maxSize);
     }
     //--------------------------------------------------------------
-    public int size() // return size
+    public int size()
     { 
         
         return top;
     }
     //--------------------------------------------------------------
-    public int peekN(int n) // peek at index n
+    public int peekN(int n)
     { 
         
         return cStack[n];
@@ -98,6 +98,7 @@ public class CharStack {
         System.out.println("");
     }
 }
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 public class Sandbox {
@@ -107,14 +108,14 @@ public class Sandbox {
     private PostfixArray postfix = new PostfixArray();
     private DoubleStack calcStack;
     private String holder = "";
-    //--------------------------------------------------------------
+
+
     public Sandbox(String s) {
         
         input = s;
         System.out.println(input);
     }
 
-   // try {
     public PostfixArray convert() {
 
         oStack = new CharStack(25);
@@ -236,9 +237,11 @@ public class Sandbox {
                 
             }
 
-        } //catch (Exception)
+        }
 
-        if (holder != "" && postfix.getElementAt(postfix.getPostfixLength()) == ")"){
+        System.out.println(input.charAt(input.length() - 1));
+        System.out.println(holder);
+        if (holder != "" && input.charAt(input.length() - 1) != ')') {
             postfix.insert(holder);
             postfix.displayPostfix();
             System.out.println();
@@ -257,17 +260,17 @@ public class Sandbox {
 
     public double doParse()
     {
-        calcStack = new DoubleStack(20); // make new stack
+        calcStack = new DoubleStack(20);
         String current = "";
         double num1, num2, cDE = 0, ans = 0;
         boolean isDouble;
         
         try {
 
-        for(int j=0; j<postfix.getPostfixLength(); j++) // for each char,
+        for(int j=0; j<postfix.getPostfixLength(); j++)
         {
-            current = postfix.getElementAt(j); // read from input
-            calcStack.displayStack(""+current+" "); // *diagnostic*
+            current = postfix.getElementAt(j);
+            calcStack.displayStack(""+current+" ");
             
             try {
                 
@@ -322,7 +325,7 @@ public class Sandbox {
         }
         postfix.displayPostfix();
         System.out.println();
-        ans = calcStack.pop(); // get answer
+        ans = calcStack.pop();
         
         if (calcStack.size() > 0) {
 
@@ -333,8 +336,6 @@ public class Sandbox {
         return ans;
     }
         
-         
-    //}
 }
 ----------------------------------------------------------------------------------------------------------------------------------
 
