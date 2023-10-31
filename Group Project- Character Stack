@@ -1,0 +1,64 @@
+public class CharStack {
+    
+    private int maxSize;
+    private char[] cStack;
+    private int top;
+
+    public CharStack(int size)
+    {
+        maxSize = size;
+        cStack = new char[maxSize];
+        top = 0;
+    }
+    
+    public void push(char c) {
+        
+        cStack[top++] = c; 
+    }
+    
+    public char pop()
+    { 
+        return cStack[--top]; 
+    
+    }
+    
+    public char peek()
+    { 
+        return cStack[top - 1]; 
+    }
+    
+    public boolean isEmpty()
+    { 
+        return (top == 0); 
+    }
+    
+    public boolean isFull()
+    {
+        
+        return (top - 1 == maxSize);
+    }
+    
+    public int size()
+    { 
+        
+        return top;
+    }
+    
+    public int peekN(int n)
+    { 
+        
+        return cStack[n];
+    }
+    
+    public void displayStack(String s)
+    {
+        System.out.print(s);
+        System.out.print("Stack (bottom-->top): ");
+        for(int j=0; j<size(); j++)
+        {
+            System.out.print( peekN(j) );
+            System.out.print(' ');
+        }
+        System.out.println("");
+    }
+}
