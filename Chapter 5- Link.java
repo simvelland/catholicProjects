@@ -27,4 +27,9 @@ public class Link {
 
         return data;
     }
+
+    public void setData(int d) {
+
+        data = d;
+    }
 }
