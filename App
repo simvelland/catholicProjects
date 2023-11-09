@@ -1,50 +1,9 @@
-import java.util.*;
-
 public class App {
     public static void main(String[] args) {
         
-        IntQueue pA = new IntQueue();
-        IntPriorityQueue pB = new IntPriorityQueue();
-        Random nT = new Random();
+        ProjectAbstractExecuteables execute = new ProjectAbstractExecuteables();
+        execute.loadTasksIntoQuadCoreProcessor();
+        execute.run();
         
-        int aIP, bIP, tasksProcessedA = 0, tasksProcessedB = 0, task = nT.nextInt(11);
-        pA.insert(task);
-        pB.insert(task);
-
-        aIP = pA.remove().getData();
-        bIP = pB.remove().getData();
-
-
-        for (int i = 1; i <= 100; i++) {
-            
-            task = nT.nextInt(10) + 1;
-
-            pA.insert(task);
-            pB.insert(task);
-
-            if (aIP == 0) {
-                aIP = pA.remove().getData();
-                aIP--;
-                tasksProcessedA++;
-            } else {
-                aIP--;
-            }
-
-            if (bIP == 0) {
-                bIP = pB.remove().getData();
-                bIP--;
-                tasksProcessedB++;
-            } else {
-                bIP--;
-            }
-
-        }
-
-        System.out.println("Tasks processed by Processor A: " + tasksProcessedA);
-        System.out.println("Tasks processed by Processor B: " + tasksProcessedB);
-        System.out.println("Number of tasks remaining for Processor A: " + (100 - tasksProcessedA));
-        System.out.println("Number of tasks remaining for Processor B: " + (100 - tasksProcessedB));
-        System.out.println("Number of cycles needed for completion of all tasks by Processor A: " + pA.sumTasks());
-        System.out.println("Number of cycles needed for completion of all tasks by Processor B: " + pB.sumTasks());
     }
 }
