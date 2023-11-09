@@ -43,6 +43,7 @@ public class SortedLinkedList {
             current.displayLink();
             current = current.getNext();
         }
+        System.out.println();
     }
 
     public boolean isEmpty() {
@@ -62,5 +63,10 @@ public class SortedLinkedList {
         }
 
         return sum;
+    }
+
+    public Link getFirst() {
+
+        return first;
     }
 }
