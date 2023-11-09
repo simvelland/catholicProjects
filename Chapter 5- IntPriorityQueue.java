@@ -31,4 +31,9 @@ public class IntPriorityQueue {
 
         return refList.sumData();
     }
+
+    public SortedLinkedList getRefList() {
+
+        return refList;
+    }
 }
