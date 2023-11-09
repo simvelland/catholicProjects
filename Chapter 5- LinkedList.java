@@ -2,6 +2,8 @@ public class LinkedList {
     
     public Link first;
     public Link last;
+    public Link current;
+    public Link previous;
 
     public LinkedList() {
 
@@ -47,6 +49,7 @@ public class LinkedList {
             current.displayLink();
             current = current.getNext();
         }
+        System.out.println();
     }
 
     public int sumData() {
@@ -61,5 +64,21 @@ public class LinkedList {
         }
 
         return sum;
+    }
+
+    public Link getFirst() {
+
+        return first;
+    }
+
+    public void nextLink() {
+
+        previous = current;
+        current = current.getNext();
+    }
+
+    public void reset() {
+
+        current = first;
     }
 }
