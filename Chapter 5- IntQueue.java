@@ -30,11 +30,16 @@ public class IntQueue {
 
     public int getElementData() {
 
-        return refList.first.getData();
+        return refList.getFirst().getData();
     }
 
     public int sumTasks() {
 
         return refList.sumData();
+    }
+
+    public LinkedList getRefList() {
+
+        return refList;
     }
 }
