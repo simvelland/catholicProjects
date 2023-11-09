@@ -1,0 +1,115 @@
+import java.util.Random;
+
+public class ProjectAbstractExecuteables {
+    
+    LinkedList processorA = new LinkedList();
+    LinkedList processorB = new LinkedList();
+    IntQueue pA = new IntQueue();
+    IntPriorityQueue pB = new IntPriorityQueue();
+    Random nT = new Random();
+    int task, tasksProcessedA = 0, tasksProcessedB = 0, tasksRemainingA = 0, tasksRemainingB = 0;
+
+    public ProjectAbstractExecuteables() {
+
+    }
+
+    public void loadTasksIntoQuadCoreProcessor() {
+
+        for (int i = 0; i < 4; i++) {
+
+            task = nT.nextInt(10) + 1;
+            pA.insert(task);
+            pB.insert(task);
+
+            processorA.reset();
+            processorB.reset();
+
+            while(processorA.current != null) {
+                    
+                processorA.nextLink();
+            }
+            processorA.insertLast(pA.remove().getData());
+
+            while(processorB.current != null) {
+
+                processorB.nextLink();
+            }
+            processorB.insertLast(pB.remove().getData());
+        }
+    }
+
+    public void run() {
+
+        for (int i = 0; i < 100; i++) {
+
+            task = nT.nextInt(10) + 1;
+            pA.insert(task);
+            pB.insert(task);
+
+            processorA.reset();;
+            processorB.reset();
+
+            for (int j = 0; j < 4; j++) {
+
+                if (processorA.current == null) {
+                    break;
+                }
+                
+                if (processorA.current.getData() == 0) {
+                    
+                    processorA.current.setData(pA.remove().getData() - 1);
+                    tasksProcessedA++;
+                } else {
+
+                    processorA.current.setData(processorA.current.getData() - 1);
+                }
+                processorA.nextLink();
+            }
+            for (int j = 0; j < 4; j++) {
+
+                if (processorB.current == null) {
+                    break;
+                }
+                
+                if (processorB.current.getData() == 0) {
+                    
+                    processorB.current.setData(pB.remove().getData() - 1);
+                    tasksProcessedB++;
+                } else {
+
+                    processorB.current.setData(processorB.current.getData() - 1);
+                }
+                processorB.nextLink();
+            }
+
+        }
+
+        processorA.reset();
+        processorB.reset();
+
+        for (int i =0; i < 4; i++) {
+
+            if (processorA.current.getData() != 0) {
+                tasksRemainingA++;
+                pA.insert(processorA.current.getData());
+            }
+            if (processorB.current.getData() != 0) {
+                tasksRemainingB++;
+                pB.insert(processorB.current.getData());
+            }
+
+            processorA.nextLink();
+            processorB.nextLink();
+        }
+        
+        System.out.println("Tasks processed by Processor A: " + tasksProcessedA);
+        System.out.println("Tasks processed by Processor B: " + tasksProcessedB);
+        System.out.println("Number of tasks remaining for Processor A: " + (100 - tasksProcessedA + tasksRemainingA));
+        System.out.println("Number of tasks remaining for Processor B: " + (100 - tasksProcessedB + tasksRemainingB));
+        System.out.println("Number of cycles needed for completion of all tasks by Processor A: " + (pA.sumTasks()));
+        System.out.println("Number of cycles needed for completion of all tasks by Processor B: " + (pB.sumTasks()));
+        System.out.println();
+        pA.displayQueue();
+        pB.displayQueue();
+    }
+}
